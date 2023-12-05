@@ -1,39 +1,30 @@
 import numpy as np
 
-def trocar_linhas(matriz, a, b):
-    # Troca as linhas a e b na matriz
-    matriz[a], matriz[b] = matriz[b].copy(), matriz[a].copy()
+def trocar_linhas(matriz, num_linhas, num_colunas, a, b):
+    for i in range(num_colunas):
+        aux = matriz[b,i]
+        matriz[b,i] = matriz[a,i]
+        matriz[a,i] = aux
 
-def exibir_matriz(matriz):
-    # Exibe os elementos da matriz
-    for linha in matriz:
-        print(" ".join(map(str, linha)))
+def exibir_matriz(matriz, num_linhas, num_colunas):
+    for i in range(num_linhas):
+        for j in range(num_colunas):
+            print(matriz[i,j], end=' ')
+        print()
 
-# Função principal
-def main():
-    # Entrada do usuário
-    semente = int(input("Digite a semente do gerador de números aleatórios: "))
-    num_linhas = int(input("Digite o número de linhas da matriz: "))
-    num_colunas = int(input("Digite o número de colunas da matriz: "))
-    a = int(input("Digite o índice da primeira linha a ser trocada: "))
-    b = int(input("Digite o índice da segunda linha a ser trocada: "))
     
-    # Configurar a semente do gerador de números aleatórios
-    np.random.seed(semente)
-    
-    # Gerar matriz aleatória
-    matriz_aleatoria = np.random.randint(10, 101, size=(num_linhas, num_colunas))
-    
-    # Exibir matriz gerada
-    print("Matriz gerada:")
-    exibir_matriz(matriz_aleatoria)
-    
-    # Trocar as linhas a e b
-    trocar_linhas(matriz_aleatoria, a, b)
-    
-    # Exibir matriz após troca de linhas
-    print("\nMatriz após troca de linhas:")
-    exibir_matriz(matriz_aleatoria)
+semente = int(input())
+num_linhas = int(input())
+num_colunas = int(input())
+a = int(input())
+b = int(input())
 
-# Chamar a função principal
-main()
+np.random.seed(semente)
+matriz_aleatoria = np.random.randint(10, 100, size=(num_linhas, num_colunas))
+
+print("Matriz gerada:")
+exibir_matriz(matriz_aleatoria, num_linhas, num_colunas)  
+trocar_linhas(matriz_aleatoria, num_linhas, num_colunas, a, b)
+print("Matriz apos troca")
+exibir_matriz(matriz_aleatoria, num_linhas, num_colunas)
+
